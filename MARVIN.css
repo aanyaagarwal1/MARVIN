@@ -34,24 +34,28 @@ body {
     top: 15px;
     left: 50%;
     transform: translateX(-50%);
+    font-size: xx-large;
 }
 
 .back {
     bottom: 15px;
     left: 50%;
     transform: translateX(-50%);
+    font-size: xx-large;
 }
 
 .left {
     left: 45px;
     top: 50%;
     transform: translateY(-50%) rotate(-90deg);
+    font-size: xx-large;
 }
 
 .right {
     right: 45px;
     top: 50%;
     transform: translateY(-50%) rotate(90deg);
+    font-size: xx-large;
 }
 
 .mode-buttons {
