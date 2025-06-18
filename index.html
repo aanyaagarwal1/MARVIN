@@ -47,6 +47,19 @@
         .catch((error) => console.error("Error:", error));
     }
   </script>
+  <script>
+    const buttons = document.querySelectorAll('.control-button, .mode-buttons button');
+
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            button.style.backgroundColor = '#bbb'; // Temporary change
+            setTimeout(() => {
+                button.style.backgroundColor = ''; // Reset after 150ms
+            }, 70);
+        });
+    });
+</script>
+
 
 </body>
 </html>
