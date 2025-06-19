@@ -15,11 +15,18 @@
     <button class="control-button left" onclick="sendCommand('left')">↑</button>
     <button class="control-button right" onclick="sendCommand('right')">↑</button>
   </div>
-
+<!-- 
   <div class="mode-buttons">
     <button onclick="sendCommand('auto')">A</button>
     <button onclick="sendCommand('manual')">M</button>
+  </div> -->
+
+  <!-- Speed Slider -->
+  <div class="slider-container">
+    <label class="slider-label">Motor Speed: <span id="speedValue">50</span>%</label>
+    <input type="range" min="0" max="100" value="50" class="speed-slider" id="speedSlider">
   </div>
+  
 
   <!-- Use module-based Firebase SDK -->
   <script type="module">
