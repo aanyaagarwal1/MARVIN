@@ -4,29 +4,31 @@
   <title>MARVIN REMOTE</title>
   <link rel="stylesheet" href="MARVIN.css">
   <style>
-    .control-button {
-      font-size: 24px;
-      padding: 10px 20px;
-    }
-    .slider-container {
-      margin-top: 20px;
-    }
+   
   </style>
 </head>
 <body>
 
   <div class="control-panel">
-    <button class="control-button" onclick="sendCommand('forward')">↑</button>
-    <button class="control-button" onclick="sendCommand('backward')">↓</button>
-    <button class="control-button" onclick="sendCommand('left')">↑</button>
-    <button class="control-button" onclick="sendCommand('right')">↑</button>
+    <button class="control-button front" onclick="sendCommand('forward')">↑</button>
+    <button class="control-button back" onclick="sendCommand('backward')">↓</button>
+    <button class="control-button left" onclick="sendCommand('left')">↑</button>
+    <button class="control-button right" onclick="sendCommand('right')">↑</button>
   </div>
+<!-- 
+  <div class="mode-buttons">
+    <button onclick="sendCommand('auto')">A</button>
+    <button onclick="sendCommand('manual')">M</button>
+  </div> -->
 
+  <!-- Speed Slider -->
   <div class="slider-container">
-    <label>Motor Speed: <span id="speedValue">50</span>%</label>
-    <input type="range" min="0" max="100" value="50" id="speedSlider">
+    <label class="slider-label">Motor Speed: <span id="speedValue">50</span>%</label>
+    <input type="range" min="0" max="100" value="50" class="speed-slider" id="speedSlider">
   </div>
+  
 
+  <!-- Use module-based Firebase SDK -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
     import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-database.js";
@@ -45,23 +47,24 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
+    // Write command to Firebase
     window.sendCommand = function(command) {
       set(ref(db, "/marvinBot/command"), command)
-        .then(() => console.log("✅ Command:", command))
-        .catch((error) => console.error("❌ Command error:", error));
-    };
-
-    const slider = document.getElementById("speedSlider");
-    const speedValue = document.getElementById("speedValue");
-
-    slider.addEventListener("input", function () {
-      const speed = parseInt(this.value);
-      speedValue.innerText = speed;
-      set(ref(db, "/marvinBot/speed"), speed)
-        .then(() => console.log("✅ Speed:", speed))
-        .catch((error) => console.error("❌ Speed error:", error));
-    });
+        .then(() => console.log("Command sent:", command))
+        .catch((error) => console.error("Error:", error));
+    }
   </script>
+  <script>
+    const buttons = document.querySelectorAll('.control-button, .mode-buttons button');
+
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            button.style.backgroundColor = '#bbb'; // Temporary change
+            setTimeout(() => {
+                button.style.backgroundColor = ''; // Reset after 150ms
+            }, 70);
+        });
+    });
+</script>
 </body>
 </html>
-
